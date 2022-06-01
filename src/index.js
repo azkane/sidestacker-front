@@ -12,7 +12,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App/>}>
         <Route path="" element={<Welcome/>}/>
-        <Route path="new-game" element={<Sidestacker key={new Date()}/>}/>
+        <Route path="new-game" element={<Sidestacker />}/>
         <Route path="*" element={<Welcome/>}/>
       </Route>
     </Routes>

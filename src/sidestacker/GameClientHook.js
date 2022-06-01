@@ -13,7 +13,13 @@ export const useGameClient = (gameId) => {
 
   useEffect(() => {
     if (!gameId || ws.current) return;
-    ws.current = new WebSocket(`ws://localhost:5000/api/game/${gameId}`)
+
+    // Work around create-react-app proxy not supporting websocket
+    const wsUrl = process.env.NODE_ENV === 'development' ?
+      `ws://localhost:5000/api/game/${gameId}` :
+      `ws://${window.location.host}/api/game/${gameId}`
+
+    ws.current = new WebSocket(wsUrl)
     ws.current.addEventListener('error', e => {
       console.log("WebSocket error", e)
       setLastError(e)

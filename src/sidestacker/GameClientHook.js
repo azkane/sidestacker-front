@@ -12,7 +12,6 @@ export const useGameClient = (gameId) => {
   const [lastMessage, setLastMessage] = useState();
 
   useEffect(() => {
-    console.log("running ws connection effect", gameId)
     if (!gameId || ws.current) return;
     ws.current = new WebSocket(`ws://localhost:5000/api/game/${gameId}`)
     ws.current.addEventListener('error', e => {

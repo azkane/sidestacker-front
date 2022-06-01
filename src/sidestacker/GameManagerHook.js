@@ -2,7 +2,8 @@ import {useSearchParams} from "react-router-dom";
 import {useEffect, useReducer, useState} from "react";
 
 /*
- * This hook maintains the current game application state.
+ * This hook maintains the current game application state. This is the logic and state which is
+ * not part of the game but of the application.
  *
  * Game application state:
  * The game application can be on one of several states at any given time.
@@ -117,20 +118,17 @@ const gameStateReducer = (state, action) => {
 export const useSidestackerInitializer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [gameId, setGameId] = useState(searchParams.get('gameId'));
-  const [isFetchingId, setFetchingId] = useState(false);
 
   useEffect(() => {
     const fetchNewGameId = async () => {
-      if (!gameId && !isFetchingId) {
-        setFetchingId(true);
+      if (!gameId) {
         let {game_id} = await newGame()
         setGameId(game_id)
         setSearchParams({gameId: game_id})
-        setFetchingId(false)
       }
     }
     fetchNewGameId();
-  }, [gameId, isFetchingId, setSearchParams])
+  }, [gameId, setSearchParams])
 
   return gameId;
 }

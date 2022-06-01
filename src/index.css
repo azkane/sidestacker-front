@@ -1,13 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+    width: 100vw;
+    height: 100vh;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.clip-cross {
+    clip-path: polygon(0 40%, 40% 40%, 40% 0, 60% 0, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0 60%);
+    transform: rotate(315deg);
+    background: rgba(254, 254, 254, 1);
+    min-width: 300px;
+    min-height: 300px;
+    margin-right: 0;
+    transform-origin: 50% 50%;
+}
+
+.doughnut {
+    background: radial-gradient(circle at right bottom,
+    rgba(0, 157, 255, 0) 24.8%,
+    rgba(254, 254, 254, 1) 25%,
+    rgba(254, 254, 254, 1) 35.8%,
+    rgba(255, 255, 255, 0) 36%);
+}
+
+.sidestacker-bg {
+    background: linear-gradient(to left, #60A5FA, #60A5FA 50%, #F87171 50%, #F87171)
+}
+
+.styled-box {
+    min-height: 600px;
+    max-width: 800px;
+    @apply flex flex-col justify-center items-center mx-auto;
+    @apply bg-sky-50 rounded-3xl p-4;
+}
+
+.board {
+    @apply grid grid-cols-9 gap-4 max-w-[800px] w-full mx-auto bg-sky-100 rounded-3xl p-4;
+}
+
+.board-control {
+    @apply h-10 w-10 lg:h-16 lg:w-16;
+    @apply font-bold text-2xl text-slate-50;
+    @apply rounded-full ring-4 ring-zinc-300 place-self-center;
+    @apply focus:outline-none;
+    @apply hover:bg-opacity-90;
+    @apply disabled:hover:ring-zinc-300;
+}
+
+.board-piece {
+    @apply rounded-full h-10 w-10 lg:h-16 lg:w-16 text-slate-50 font-bold text-2xl;
+}
+
+.cross-token {
+    background-color: #F87171;
+    background-image: linear-gradient(45deg, transparent 45%, #fefefe 46%, #fefefe 54%, transparent 55%),
+    linear-gradient(135deg, transparent 45%, #fefefe 46%, #fefefe 54%, transparent 55%);
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+
+    @apply bg-red-400;
+    @apply hover:ring-blue-400;
+}
+
+.circle-token {
+    background: radial-gradient(circle at center center,
+    rgb(96, 165, 250) 22%,
+    rgba(254, 254, 254, 1) 25%,
+    rgba(254, 254, 254, 1) 33%,
+    rgb(96, 165, 250) 36%);
+
+    @apply hover:ring-red-400;
 }

@@ -19,11 +19,14 @@ import {useCallback, useEffect, useReducer} from "react";
  boardSize: Board size, defaults to 7
  self: Object with piece and turn for this player
  players: Array of currently connected players
- player1: Object with piece and turn for player 1
- player2: Object with piece and turn for player 2
  lastServerMessage: The object the server sent last
 
- Once boardSize, player1 and player2 are not undefined the game can start.
+ This hook returns an object with the following definition:
+ gameState: Current game state (see above)
+ board: An array of arrays which represents the board
+ placePiece: A function which allows the client to place pieces given row and side
+ availableRows: An array of booleans which represent if a row has free spaces
+ piece: The piece (X or C) that this client was assigned.
  */
 export const useSidestacker = (boardSize, self, players, lastServerMessage, sendMessage) => {
   const [state, dispatch] = useReducer(sidestackerGameReducer, {

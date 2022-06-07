@@ -118,23 +118,25 @@ const gameStateReducer = (state, action) => {
 export const useSidestackerInitializer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [gameId, setGameId] = useState(searchParams.get('gameId'));
+  const isAgainstBot = searchParams.get('bot');
+  console.log('isAgainstbot', isAgainstBot, 'gameId',gameId);
 
   useEffect(() => {
     const fetchNewGameId = async () => {
       if (!gameId) {
-        let {game_id} = await newGame()
+        let {game_id} = await newGame(isAgainstBot)
         setGameId(game_id)
-        setSearchParams({gameId: game_id})
+        setSearchParams({gameId: game_id, bot: isAgainstBot})
       }
     }
     fetchNewGameId();
-  }, [gameId, setSearchParams])
+  }, [gameId, isAgainstBot, setSearchParams])
 
-  return gameId;
+  return {gameId, isAgainstBot};
 }
 
-const newGame = async () => {
-  let response = await fetch('/api/new-game', {method: 'POST'});
+const newGame = async (isAgainstBot = undefined) => {
+  let response = await fetch(`/api/new-game${isAgainstBot ? '?bot=True' : ''}`, {method: 'POST'});
   response = await response.json()
   return response;
 }

@@ -16,12 +16,12 @@ import {Link} from "react-router-dom";
  *
  */
 export const Sidestacker = () => {
-  const gameId = useSidestackerInitializer();
+  const {gameId, isAgainstBot} = useSidestackerInitializer();
   const {lastMessage, sendMessage} = useGameClient(gameId);
   const {gameAppState, result, self, players, message} = useGameManager(gameId, lastMessage);
   const sidestacker = useSidestacker(7, self, players, lastMessage, sendMessage);
   const gameManagerProps = {
-    gameAppState, result, self, message, gameId
+    gameAppState, result, self, message, gameId, isAgainstBot
   }
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const UIForGameState = ({gameManagerProps, gameProps}) => {
     case 'playing-game':
       return <Board {...gameProps}/>
     case 'game-results':
-      return <Results result={gameManagerProps.result}/>
+      return <Results result={gameManagerProps.result} isAgainstBot={gameManagerProps.isAgainstBot}/>
     default:
       return <StyledBox>Something went wrong :(</StyledBox>
   }
@@ -145,7 +145,7 @@ const StyledBox = ({children}) => {
   </div>
 }
 
-const Results = ({result}) => {
+const Results = ({result, isAgainstBot}) => {
   const face = {
     'tie': 'https://avatars.dicebear.com/api/big-smile/2.svg?mouth=unimpressed',
     'lost': 'https://avatars.dicebear.com/api/big-smile/2.svg?mouth=openSad',
@@ -162,8 +162,8 @@ const Results = ({result}) => {
          className="w-24 h-24"
     />
     <span className="text-slate-700 text-3xl font-bold my-12">{message[result]}</span>
-    <Link to="/new-game"
-          onClick={() => window.location.href = '/new-game'}
+    <Link to={`/new-game${isAgainstBot ? '?bot=true' : ''}`}
+          onClick={() => window.location.href = `/new-game${isAgainstBot ? '?bot=true': ''}`}
           className="px-8 py-4 bg-blue-400 text-slate-50 font-bold text-2xl ml-auto mr-auto rounded-xl">
       Try again?
     </Link>

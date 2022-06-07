@@ -43,10 +43,13 @@ function App() {
 export const Welcome = () => {
   return <Fragment>
     <Instructions/>
-    <div className='text-center my-12'>
+    <div className='text-center my-12 flex'>
       <Link to="/new-game"
             className="px-8 py-4 bg-blue-400 text-slate-50 font-bold text-2xl ml-auto mr-auto rounded-xl">Play
-        now!</Link>
+        now with a friend!</Link>
+      <Link to="/new-game?bot=true"
+            className="px-8 py-4 bg-blue-400 text-slate-50 font-bold text-2xl ml-auto mr-auto rounded-xl">Play
+        with a bot!</Link>
     </div>
   </Fragment>
 }

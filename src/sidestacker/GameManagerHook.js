@@ -119,7 +119,6 @@ export const useSidestackerInitializer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [gameId, setGameId] = useState(searchParams.get('gameId'));
   const isAgainstBot = searchParams.get('bot');
-  console.log('isAgainstbot', isAgainstBot, 'gameId',gameId);
 
   useEffect(() => {
     const fetchNewGameId = async () => {

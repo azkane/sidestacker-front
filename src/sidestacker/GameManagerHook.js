@@ -125,7 +125,7 @@ export const useSidestackerInitializer = () => {
       if (!gameId) {
         let {game_id} = await newGame(isAgainstBot)
         setGameId(game_id)
-        setSearchParams({gameId: game_id, bot: isAgainstBot})
+        setSearchParams(Object.assign({gameId: game_id}, isAgainstBot ? {bot: isAgainstBot} : null))
       }
     }
     fetchNewGameId();

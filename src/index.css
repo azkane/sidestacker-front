@@ -55,9 +55,9 @@ code {
 }
 
 .board-control {
-    @apply h-10 w-10 lg:h-16 lg:w-16;
+    @apply h-10 w-10 lg:h-10 lg:w-10;
     @apply font-bold text-2xl text-slate-50;
-    @apply rounded-full ring-4 ring-zinc-300 place-self-center;
+    @apply rounded-xl ring-4 ring-zinc-300 place-self-center ;
     @apply focus:outline-none;
     @apply hover:bg-opacity-90;
     @apply disabled:hover:ring-zinc-300;
